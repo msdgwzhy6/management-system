@@ -1,13 +1,10 @@
 package com.ManagementSystem.config;
 
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -17,9 +14,6 @@ import org.springframework.web.servlet.handler.SimpleServletHandlerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
-
-import java.util.Properties;
 
 /**
  * Created by IntelliJ IDEA 14.
@@ -38,14 +32,14 @@ public class MyApplicationContextMvcConfig extends WebMvcConfigurationSupport {
      </p>
      * @return
      */
-//    @Bean
-//    public MessageSource messageSource() {
-//        System.out.println("===================注册消息资源处理器==============");
-//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//        messageSource.setBasename("config.messages.messages");
-//
-//        return messageSource;
-//    }
+    @Bean
+    public MessageSource messageSource() {
+        System.out.println("===================注册消息资源处理器==============");
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("config.messages.messages");
+
+        return messageSource;
+    }
 
     /**
      * 描述 : <注册servlet适配器>. <br>
@@ -54,11 +48,11 @@ public class MyApplicationContextMvcConfig extends WebMvcConfigurationSupport {
      </p>
      * @return
      */
-//    @Bean
-//    public HandlerAdapter servletHandlerAdapter(){
-//        System.out.println("注册servlet适配器");
-//        return new SimpleServletHandlerAdapter();
-//    }
+    @Bean
+    public HandlerAdapter servletHandlerAdapter(){
+        System.out.println("注册servlet适配器");
+        return new SimpleServletHandlerAdapter();
+    }
 
 
     /**
@@ -68,10 +62,10 @@ public class MyApplicationContextMvcConfig extends WebMvcConfigurationSupport {
      </p>
      * @return
      */
-//    public LocaleChangeInterceptor localeChangeInterceptor(){
-//        System.out.println("本地化拦截器");
-//        return new LocaleChangeInterceptor();
-//    }
+    public LocaleChangeInterceptor localeChangeInterceptor(){
+        System.out.println("本地化拦截器");
+        return new LocaleChangeInterceptor();
+    }
 
 
     /**
@@ -81,11 +75,11 @@ public class MyApplicationContextMvcConfig extends WebMvcConfigurationSupport {
      </p>
      * @return
      */
-//    @Bean(name="localeResolver")
-//    public CookieLocaleResolver cookieLocaleResolver(){
-//        System.out.println("基于cookie的本地化资源处理器");
-//        return new CookieLocaleResolver();
-//    }
+    @Bean(name="localeResolver")
+    public CookieLocaleResolver cookieLocaleResolver(){
+        System.out.println("基于cookie的本地化资源处理器");
+        return new CookieLocaleResolver();
+    }
 
 
     /**
@@ -94,13 +88,13 @@ public class MyApplicationContextMvcConfig extends WebMvcConfigurationSupport {
      添加Spring MVC的预处理和后期处理生命周期拦截器控制器方法调用。
      * @param registry
      */
-//    @Override
-//    protected void addInterceptors(InterceptorRegistry registry) {
-//        // TODO Auto-generated method stub
-//        System.out.println("添加拦截器 start");
-//        registry.addInterceptor(localeChangeInterceptor());
-//        System.out.println("添加拦截器 end");
-//    }
+    @Override
+         protected void addInterceptors(InterceptorRegistry registry) {
+        // TODO Auto-generated method stub
+        System.out.println("添加拦截器 start");
+        registry.addInterceptor(localeChangeInterceptor());
+        System.out.println("添加拦截器 end");
+    }
 
     /**
      * 描述 : <资源访问处理器>. <br>
